@@ -2,8 +2,7 @@ package tracker.statisticsHandler;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import tracker.studentsHandling.StudentsHandler;
 
 import java.io.ByteArrayInputStream;
@@ -20,18 +19,14 @@ class StatisticsHandlerTest {
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
 
-    @Before
-    public void setUpStreams() {
-        System.setOut(new PrintStream(outContent));
-    }
-
     @BeforeEach
     public void beforeEach() {
+        System.setOut(new PrintStream(outContent));
         initiateStudents();
         addPoints();
     }
 
-    @After
+    @AfterEach
     public void restoreStreams() {
         System.setOut(originalOut);
     }
