@@ -5,10 +5,14 @@ import tracker.Student;
 import java.util.*;
 
 public class StudentsHandler {
-    Map<Integer, Student> studentsDatabase = new LinkedHashMap<>();
-    Set<String> emailsDatabase = new HashSet<>();
+    private final Map<Integer, Student> studentsDatabase = new LinkedHashMap<>();
 
+    Set<String> emailsDatabase = new HashSet<>();
     public StudentsHandler() {
+    }
+
+    public Map<Integer, Student> getStudentsDatabase() {
+        return studentsDatabase;
     }
 
     public void addStudents(Scanner sc) {
@@ -62,10 +66,10 @@ public class StudentsHandler {
                 String[] inputParts = input.split(" ");
                 try {
                     Student student = studentsDatabase.getOrDefault(Integer.parseInt(inputParts[0]), null);
-                    student.getJava().addPoints(Integer.parseInt(inputParts[inputParts.length - 4]));
-                    student.getDsa().addPoints(Integer.parseInt(inputParts[inputParts.length - 3]));
-                    student.getDb().addPoints(Integer.parseInt(inputParts[inputParts.length - 2]));
-                    student.getSpring().addPoints(Integer.parseInt(inputParts[inputParts.length - 1]));
+                    student.addPointsJava(Integer.parseInt(inputParts[inputParts.length - 4]));
+                    student.addPointsDSA(Integer.parseInt(inputParts[inputParts.length - 3]));
+                    student.addPointsDB(Integer.parseInt(inputParts[inputParts.length - 2]));
+                    student.addPointsSpring(Integer.parseInt(inputParts[inputParts.length - 1]));
                     System.out.println("Points updated.");
 
                 } catch (Exception e) {

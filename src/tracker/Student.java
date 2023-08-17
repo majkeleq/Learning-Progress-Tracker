@@ -1,5 +1,7 @@
 package tracker;
 
+import tracker.statisticsHandler.Statistics;
+
 import java.util.Objects;
 
 public class Student {
@@ -21,14 +23,6 @@ public class Student {
         counter += 1;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public int getId() {
-        return id;
-    }
-
     public Course getJava() {
         return java;
     }
@@ -45,6 +39,45 @@ public class Student {
         return spring;
     }
 
+    public String getEmail() {
+        return email;
+    }
+
+    public int getId() {
+        return id;
+    }
+    public void addPointsJava(int points) {
+        if (points > 0) {
+            if (java.getPoints() == 0) Statistics.incrementJavaPopularity();
+            Statistics.incrementJavaActivity();
+            Statistics.addJavaPoints(points);
+            java.addPoints(points);
+        }
+    }
+    public void addPointsDSA(int points) {
+        if (points > 0) {
+            if (dsa.getPoints() == 0) Statistics.incrementDsaPopularity();
+            Statistics.incrementDsaActivity();
+            Statistics.addDsaPoints(points);
+            dsa.addPoints(points);
+        }
+    }
+    public void addPointsDB(int points) {
+        if (points > 0) {
+            if (db.getPoints() == 0) Statistics.incrementDbPopularity();
+            Statistics.incrementDbActivity();
+            Statistics.addDbPoints(points);
+            db.addPoints(points);
+        }
+    }
+    public void addPointsSpring(int points) {
+        if (points > 0) {
+            if (spring.getPoints() == 0) Statistics.incrementSpringPopularity();
+            Statistics.incrementSpringActivity();
+            Statistics.addSpringPoints(points);
+            spring.addPoints(points);
+        }
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
