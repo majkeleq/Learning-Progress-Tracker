@@ -1,10 +1,15 @@
 package tracker.statisticsHandler;
 
+import tracker.Course;
 import tracker.Student;
 
-import java.util.Comparator;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.function.Function;
 
 public class StatisticsHandler {
     public StatisticsHandler() {
@@ -20,16 +25,43 @@ public class StatisticsHandler {
         System.out.printf("Hardest course: %s\n", Statistics.getHardestCourse());
         String input = sc.nextLine();
         while(!input.equals("back")) {
-            temp(studentsDatabase);
+            switch (input.toLowerCase()) {
+                case "java" -> {
+                    System.out.println("Java");
+                    getCourseDetails(studentsDatabase, Student::getJava);
+                }
+                case "dsa" -> {
+                    System.out.println("DSA");
+                    getCourseDetails(studentsDatabase, Student::getDsa);
+                }
+                case "databases" -> {
+                    System.out.println("Databases");
+                    getCourseDetails(studentsDatabase, Student::getDb);
+                }
+                case "spring" -> {
+                    System.out.println("Spring");
+                    getCourseDetails(studentsDatabase, Student::getSpring);
+                }
+                default -> System.out.println("Unknown course.");
+
+            }
             input = sc.nextLine();
         }
     }
-    private void temp(Map<Integer, Student> studentsDatabase) {
-        System.out.print("id\tpoints\n");
+    private void getCourseDetails(Map<Integer, Student> studentsDatabase, Function<Student,Course> getCourse) {
+        System.out.print("id\tpoints\tcompleted\n");
+
         studentsDatabase.values()
                 .stream()
-                .filter(student -> student.getJava().getPoints() > 0)
-                .sorted(Comparator.comparingInt(s -> s.getJava().getPoints()))
-                .forEach(s -> System.out.printf("%d\t%d\n",s.getId(), s.getJava().getPoints()));
+                .filter(student -> getCourse.apply(student).getPoints() > 0)
+                //.sorted(Comparator.comparingInt(s -> s.getJava().getCourse()))
+                //.sorted((s1,s2)-> Integer.compare(s2.getJava().getCourse(), s1.getJava().getCourse()))
+                .sorted((s1,s2)-> Integer.compare(getCourse.apply(s2).getPoints(), getCourse.apply(s1).getPoints()))
+                .forEach(s -> {
+                    BigDecimal completed = BigDecimal.valueOf((double) (getCourse.apply(s).getPoints() * 100) / getCourse.apply(s).getMaxPoints()).setScale(1,RoundingMode.HALF_UP);
+                    //Double completed = (double) (getCourse.apply(s).getPoints() * 100)/getCourse.apply(s).getMaxPoints();
+                    System.out.printf("%d\t%d\t%s%%\n",s.getId(), getCourse.apply(s).getPoints(),
+                        completed);
+                });
     }
 }

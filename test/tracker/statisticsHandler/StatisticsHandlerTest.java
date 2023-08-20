@@ -87,10 +87,11 @@ class StatisticsHandlerTest {
                 Lowest activity: Spring
                 Easiest course: Spring
                 Hardest course: DSA
-                id\tpoints
-                2\t22
-                1\t2
-                3\t1
+                Java
+                id	points	completed
+                2	22	3.7%
+                1	2	0.3%
+                3	1	0.2%
                 """;
         //expectedOutput = expectedOutput.replace("\n", "\r\n");
         String output = outStream.toString().replace("\r","");

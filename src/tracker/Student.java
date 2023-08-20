@@ -12,10 +12,10 @@ public class Student {
 
     private final String email;
 
-    private Course java = new Course();
-    private Course dsa = new Course();
-    private Course db = new Course();
-    private Course spring = new Course();
+    private final Course java = new Course(600);
+    private final Course dsa = new Course(400);
+    private final Course db = new Course(480);
+    private final Course spring = new Course(550);
     public Student(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;

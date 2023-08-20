@@ -100,20 +100,45 @@ public class Statistics {
 
     private static String getMost(int java, int dsa, int db, int spring) {
         int max = Math.max(Math.max(java, dsa), Math.max(db, spring));
+        StringBuilder courses = new StringBuilder();
         if (max == 0) return "n/a";
-        if (max == java) return "Java";
-        if (max == dsa) return "DSA";
-        if (max == db) return "Databases";
-        return "Spring";
-
+        if (max == java) {
+            courses.append("Java");
+        }
+        if (max == dsa) {
+            if (courses.length() != 0) courses.append(", ");
+            courses.append("DSA");
+        }
+        if (max == db) {
+            if (courses.length() != 0) courses.append(", ");
+            courses.append("Databases");
+        }
+        if (max == spring) {
+            if (courses.length() != 0) courses.append(", ");
+            courses.append("Spring");
+        }
+        return courses.toString();
     }
 
     private static String getLeast(int java, int dsa, int db, int spring) {
         int min = Math.min(Math.min(java, dsa), Math.min(db, spring));
-        if (min == 0) return "n/a";
-        if (min == spring) return "Spring";
-        if (min == db) return "Databases";
-        if (min == dsa) return "DSA";
-        return "Java";
+        StringBuilder courses = new StringBuilder();
+        if (min == 0 || (java == dsa && dsa == db && db == spring)) return "n/a";
+        if (min == java) {
+            courses.append("Java");
+        }
+        if (min == dsa) {
+            if (courses.length() != 0) courses.append(", ");
+            courses.append("DSA");
+        }
+        if (min == db) {
+            if (courses.length() != 0) courses.append(", ");
+            courses.append("Databases");
+        }
+        if (min == spring) {
+            if (courses.length() != 0) courses.append(", ");
+            courses.append("Spring");
+        }
+        return courses.toString();
     }
 }
