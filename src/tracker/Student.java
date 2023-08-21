@@ -12,10 +12,10 @@ public class Student {
 
     private final String email;
 
-    private final Course java = new Course(600);
-    private final Course dsa = new Course(400);
-    private final Course db = new Course(480);
-    private final Course spring = new Course(550);
+    private final Course java = new Course(600, "Java");
+    private final Course dsa = new Course(400, "DSA");
+    private final Course db = new Course(480, "Databases");
+    private final Course spring = new Course(550, "Spring");
     public Student(String firstName, String lastName, String email) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -46,6 +46,15 @@ public class Student {
     public int getId() {
         return id;
     }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
     public void addPointsJava(int points) {
         if (points > 0) {
             if (java.getPoints() == 0) Statistics.incrementJavaPopularity();

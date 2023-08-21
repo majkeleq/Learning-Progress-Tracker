@@ -11,6 +11,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         StudentsHandler studentsHandler = new StudentsHandler();
         StatisticsHandler statisticsHandler = new StatisticsHandler();
+        Notifications notify = new Notifications();
         boolean toContinue = true;
         System.out.println("Learning Progress Tracker");
         while (toContinue) {
@@ -21,6 +22,7 @@ public class Main {
                 case "list" -> studentsHandler.listStudents();
                 case "find" -> studentsHandler.findStudent(sc);
                 case "statistics" -> statisticsHandler.showStatistics(sc, studentsHandler.getStudentsDatabase());
+                case "notify" -> notify.notify(studentsHandler.getStudentsDatabase());
                 case "back" -> System.out.println("Enter 'exit' to exit the program");
                 case "exit" -> {
                     System.out.println("Bye!");
